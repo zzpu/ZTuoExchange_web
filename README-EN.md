@@ -1,24 +1,33 @@
-# version
-这是一个开发版本
-- 法币交易,币币交易
+# Version
+This is a development version
+- Fiat currency transaction, currency transaction
+
+---
+- ## [简体中文](README.md)
+---
+
+# Donate:
+#### Your donation is our biggest motivation for open source
+- BTC/USDT (Bitcoin/USDT): 1Dwwqhw9pV9iSSQwuJc8nAygda7XfahaoW
+- ETH/USDT (Ethereum/USDT): 0x4f1ea0f10aa99f608f31f70b4d3119f6928693ed
+- LTC (Litecoin): LXr4TMtDhCSpdAo98vg2sbvX3UXDVPQvMa
 
 
-## 前端开发规范
-1. 页面使用驼峰法命名，如Exchange.vue,WithdrawRecord.vue,名称为英文单词，并且要能正确描述该模块功能
-2. 变量命名禁止使用拼音，特别是拼音缩写
-3. 页面比较多时应该使用文件夹做分类,如路由以及国际化管理可以采用webpack提供的require来实现分包,方便维护;
-4. 模块中data变量应该尽量少，比较多时应该使用子对象进行管理
+# Front-end development specification
+1. The page is named using the camel case method, such as Exchange.vue, WithdrawRecord.vue, the name is English words, and the function of the module must be correctly described
+2. It is forbidden to use pinyin for variable naming, especially pinyin abbreviations
+3. When there are many pages, folders should be used for classification, such as routing and international management can use the require provided by webpack to implement subcontracting, which is convenient for maintenance;
+4. There should be as few data variables as possible in the module, and sub-objects should be used for management when there are more
+
 
 > A Vue.js project
-## 注意点
-1. node版本必须大于8.0以上,需要使用对应的npm版本，如果安装依赖或者第三方包的过程中出现报错现象，可以使用npm代理，或者切换镜像
-2. 因为这是基于一个完整版本的分离版，可能牵扯到杠杆交易，ieo管理的接口，由于页面之间的耦合度关系，需要跟踪错误，注掉报错的接口；
-3. nginx 需要配置开启gzip压缩,可以极大提高首页的加载速度，防止出现白屏的现象;
-4. compression-webpack-plugin 该插件版本需要关注，这个插件的作用是压缩js，css资源为.gz格式的，由于对应的webpack版本的关系，需要降低该compression-webpack-plugin插件版本，详情参阅 package.json文件
+# be careful
+1. The node version must be greater than 8.0, and the corresponding npm version needs to be used. If an error occurs during the installation of dependencies or third-party packages, you can use npm proxy or switch mirroring
+2. Because this is a separate version based on a complete version, it may involve leveraged trading and the interface of ieo management. Due to the coupling between pages, it is necessary to track errors and annotate the error-reporting interface;
+3. Nginx needs to be configured to enable gzip compression, which can greatly improve the loading speed of the home page and prevent the phenomenon of white screen;
+4. Compression-webpack-plugin This plug-in version needs attention. The function of this plug-in is to compress js and css resources in .gz format. Due to the corresponding webpack version, the compression-webpack-plugin plug-in version needs to be reduced. See details package.json file
 
-
-
-## Build Setup
+# Build Setup
 
 ``` bash
 # install dependencies
@@ -46,69 +55,73 @@ npm test
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 
-## 更新日志  
-2018.7.27   
-1、个人资产、手续费、成交金额等固定截取8位小数； 
+## Join us
+    In order to facilitate everyone to communicate and learn, please join the QQ exchange group:
+    *Blockchain exchange technical knowledge exchange group [QQ group: 735446452]
 
-2018.7.21   
-1、修复账户设置绑定支付宝和微信部分页面乱码的BUG； 
+## Update log
+2018.7.27
+1. Personal assets, handling fees, transaction amount, etc. are cut to 8 decimal places;
 
-2018.7.20   
-1、修复币币交易买卖区域和委托记录会显示科学计数的BUG；   
+2018.7.21
+1. Fix the bug of garbled code on some pages of Alipay and WeChat in account settings;
 
-2018.7.18   
-1、修复币币交易换算人民币数值不正确的问题； 
-2、优化币币交易选择交易对后左上选择区域的状态； 
-3、交易挖矿、持币分红页面科学计数转换为数字；  
-4、持币分红页面分页功能；  
-5、法币交易我的订单增加联系电话；  
+2018.7.20
+1. Fix the bug that the currency trading area and the commission record will display scientific counting;
 
-2018.7.17   
-1、修复提币页面提现记录分页BUG并优化筛选功能； 
-2、首页特点内容优化；  
+2018.7.18
+1. Fix the problem that the value of RMB in currency conversion is incorrect;
+2. Optimize the status of the upper left selection area after selecting a trading pair for currency trading;
+3. The scientific counting of transaction mining and currency holding dividend pages is converted into numbers;
+4. Paging function on the currency holding dividend page;
+5. My order for fiat currency transactions adds a contact number;
 
-2018.7.16   
-1、币币交易去掉价格显示2位小数的限制；  
-2、修复币币交易页面换算人民币数值错误的BUG；  
-3、提币页面，提币地址下拉框允许用户手动输入； 
-4、修复提币页面，提现记录表格币种列无数据的BUG；  
-5、修复提币页面，提现记录表格选择币种返回的有数据但表格上未显示的BUG；  
-6,法币交易样式修改
-7:微信客服图片添加
-8：聊天内容icon替换
-9:提笔精度修改  
+2018.7.17
+1. Fix the BUG of withdrawal record page on the withdrawal page and optimize the screening function;
+2. Homepage feature content optimization;
 
-2018.7.13   
-1、推广好友、我的佣金增加分页功能； 
-2、buyPrice精度调整为8，以解决法币交易买入输入小数点数值时报“数量错误”的错误； 
-3、样式修改；以及二维码上线； 
+2018.7.16
+1. The currency transaction removes the restriction of displaying the price to 2 decimal places;
+2. Fix the bug that the currency conversion page converts the RMB value error;
+3. On the withdrawal page, the drop-down box of the withdrawal address allows users to manually input;
+4. Fix the bug that there is no data in the currency column of the withdrawal record form on the withdrawal page;
+5. Fix the BUG that has data but is not displayed on the currency selection page in the withdrawal record form.
+6. Modification of legal currency transaction style
+7: Add WeChat customer service picture
+8: chat content icon replacement
+9: Modification of pen lifting accuracy
 
-2018.7.12   
-1、修复法币交易输入与卖出数量相等的值无法提交购买的BUG；  
-2、公告页样式修改,首页公告走马灯添加;
+2018.7.13
+1. Increase the paging function for the promotion of friends and my commission;
+2. The accuracy of buyPrice is adjusted to 8, in order to solve the error of "quantity error" when entering decimal point value when buying in fiat currency;
+3. Style modification; and the QR code is online;
 
-2018.7.11   
-1、banner图替换1-6；  
-2、字段修正 买入卖出 以及样式修正;
+2018.7.12
+1. Fix the bug that the value of the legal currency transaction input and the sold quantity cannot be submitted for purchase;
+2. Modified the style of the announcement page, and added a revolving light to the homepage announcement;
 
-2018.7.10  
-1、真实姓名用*代替；  
+2018.7.11
+1. Replace the banner picture with 1-6;
+2. Field modification, buying and selling, and style modification;
 
-2018.7.9   
-1、实名认证上传图片超过2M拒绝提交；
+2018.7.10
+1. Replace the real name with *;
 
-2018.7.8  
-1、banner指示器 bottom 3px=>20px；  
-2、超级合伙人连接去掉；  
-3、实名认证上传图片失败提示；   
-4、实名认证审核失败提示；  
-5、banner图替换126；  
-6、修复提币页面poptip组件出现黑色滚动条的BUG。  
+2018.7.9
+1. Real-name authentication uploads more than 2M to refuse to submit pictures;
 
-2018.7.7  
-1、修复公告列表页第一页只有3条中文标题的BUG；  
-2、修复首页折线图接口返回[]时js报错的问题；  
-3、myextension页面中英文联动；  
-4、财务中心=》持币分红 nodata 错误提示去掉；  
-5、首页app下载二维码暂时去掉；  
-6、注册按钮点击后字不显示的BUG。  
+2018.7.8
+1. Banner indicator bottom 3px=>20px;
+2. Remove the super partner connection;
+3. Prompt for failure to upload pictures for real-name authentication;
+4. The real-name certification audit failed prompt;
+5. Replace 126 with banner map;
+6. Fix the bug that the black scroll bar appears in the poptip component on the withdrawal page.
+
+2018.7.7
+1. Fix the bug that there are only 3 Chinese titles on the first page of the announcement list page;
+2. Fix the problem that js reports an error when the homepage line chart interface returns [];
+3. Chinese and English linkage on myextension page;
+4. Financial Center=》Remove the nodata error message of holding currency dividend;
+5. Remove the QR code from the homepage app download temporarily;
+6. The bug that the word does not display after the registration button is clicked.
