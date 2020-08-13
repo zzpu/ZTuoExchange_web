@@ -1,3 +1,5 @@
+# This source code is limited to exchange and study, where it involves legal issues and I have nothing to do with it
+
 # Version
 This is a development version
 - Fiat currency transaction, currency transaction
