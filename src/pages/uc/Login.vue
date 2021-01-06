@@ -152,10 +152,12 @@ export default {
         },
         initGtCaptcha() {
             var self = this;
-            var captcha1 = new TencentCaptcha("2040846200", (res) => {
-                res.ret == 0 && (self.ticket = res.ticket) && (self.randStr = res.randstr) && self.success(res.ticket, res.randstr);//腾讯防水验证成功的回调
-            });
-            captcha1.show(); // 显示验证码
+            // var captcha1 = new TencentCaptcha("2040846200", (res) => {
+            //     // res.ret == 0 && (self.ticket = res.ticket) && (self.randStr = res.randstr) && self.success(res.ticket, res.randstr);//腾讯防水验证成功的回调
+            // });
+            // captcha1.show(); // 显示验证码
+
+            self.success("", "");
         },
         /**验证用户是否开启了谷歌验证  返回值1为开启*/
         isNeedGoogle(tel) {

@@ -344,13 +344,16 @@ export default {
             this.getAreas();
         },
         initGtCaptcha() {
-            // 直接生成一个验证码对象
-            let captcha1 = new TencentCaptcha("2038419167", (res) => {
-                res.ret == 0 && (this.ticket = res.ticket) && (this.randStr = res.randstr);
-                (this.changeActive == 0) && this.success();
-                this.changeActive == 1 && this.emailSuccess();
-            });
-            captcha1.show(); // 显示验证码
+            // // 直接生成一个验证码对象
+            // let captcha1 = new TencentCaptcha("2038419167", (res) => {
+            //     res.ret == 0 && (this.ticket = res.ticket) && (this.randStr = res.randstr);
+            //     (this.changeActive == 0) && this.success();
+            //     this.changeActive == 1 && this.emailSuccess();
+            // });
+            // captcha1.show(); // 显示验证码
+
+            (this.changeActive == 0) && this.success();
+            this.changeActive == 1 && this.emailSuccess();
         },
         onAreaChange(value) {
             for (let i = 0; i < this.areas.length; i++) {

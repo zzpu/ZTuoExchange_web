@@ -19,7 +19,7 @@ Vue.use(vueResource);
 Vue.use(VueI18n);
 
 
-Vue.prototype.host = "http://ztuo.fcoincn.com"; // 第一套
+Vue.prototype.host = "http://127.0.0.1"; // 第一套
 
 Vue.prototype.api = Api;
 Vue.http.options.credentials = true;
