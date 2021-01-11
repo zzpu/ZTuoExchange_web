@@ -19,8 +19,7 @@
                             <div class="inner-box deposit-address">
                                 <p class="describe">{{$t('uc.finance.recharge.address')}}</p>
                                 <div class="title">
-                                    <Input
-                                        v-model="qrcode.value"
+                                    <Input                                    v-model="qrcode.value"
                                         readonly
                                         style="width: 400px"
                                     ></Input>
@@ -31,8 +30,14 @@
                                         :loading="loadingButton1"
                                     >
                                         {{ !loadingButton1 ? $t("uc.finance.money.getaddress") : $t("uc.finance.money.getaddress")}}
+
                                         <!--获取充币地址-->
                                     </Button>
+                                    <a-button-group  v-for="(coin, index ) in coinMap[coinType]">
+                                        <a-button type="primary">
+                                           {{coin.coin.name}}
+                                        </a-button>
+                                    </a-button-group>
                                     <a v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" id="copyBtn" class="link-copy">
                                         {{$t('uc.finance.recharge.copy')}}
                                     </a>
@@ -49,6 +54,7 @@
                                         </Modal>
                                     </a>
                                 </div>
+
                             </div>
                         </div>
                         <div class="action-content">
@@ -79,6 +85,8 @@
 <script>
 import Vue from "vue";
 import VueQriously from "vue-qriously";
+import { Button } from 'ant-design-vue';
+Vue.use(Button);
 Vue.use(VueQriously);
 
 export default {
@@ -99,6 +107,7 @@ export default {
             },
             coinType: "",
             coinList: [],
+            coinMap: {},
             tableRecharge: [],
             allTableRecharge: []
         };
@@ -176,7 +185,21 @@ export default {
             this.$http.post(this.host + this.api.uc.wallet).then(response => {
                 let resp = response.body;
                 if (resp.code == 0) {
-                   this.coinList =  (resp.data.length>0 && resp.data.filter(ele=>ele.coin.canRecharge ==1)) || [];
+                    for(let i = 0; i< resp.data.length; i++){
+                        if(this.coinMap[ resp.data[i].coin.name] == null){
+                            this.coinMap[ resp.data[i].coin.name]=[];
+                            //允许充值的才显示
+                            if(resp.data[i].coin.canRecharge ==1){
+                                this.coinList.push(resp.data[i]);
+                            }
+                        }
+                        this.coinMap[resp.data[i].coin.name].push(resp.data[i]);
+                    }
+
+                   // this.coinList =  (resp.data.length>0 && resp.data.filter(function(x, index,self) {
+                   //     return this.coinMap[x.coin.name] == "";
+                   // })) || [];
+
                    this.changeCoin(this.coinType);
                 } else {
                     this.$Message.error(resp.message);

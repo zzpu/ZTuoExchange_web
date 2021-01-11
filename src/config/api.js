@@ -5,7 +5,7 @@ export default {
     uc: { //会员中心接口
         login: '/uc/login',
         register: '/uc/register',
-        wallet: '/uc/asset/wallet/',
+        wallet: '/uc/asset/wallet',
         captcha: '/uc/start/captcha',
         identification: '/uc/approve/certified/business/status', //商家认证
         apply: '/uc/approve/certified/business/apply', //商家认证申请
