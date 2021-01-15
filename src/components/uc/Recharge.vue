@@ -17,8 +17,8 @@
                                 </Select>
                             </div>
                             <div>
-                                <ButtonGroup  v-for="(coin, index ) in coinMap[coinType]" :key="index">
-                                    <Button style="margin-right:10px;margin-top:10px; background: #eeeeee;display: block; font-size: 8px;">
+                                <ButtonGroup  v-for="(coin, index) in coinMap[coinType]" :key="index">
+                                    <Button style="margin-right:10px;margin-top:10px; background: #eeeeee;display: block;font-size: 8px;" :id="coin.address"   @click="changeToken(coin)">
                                         {{coin.token ? coin.token:coin.coin.name}}
                                     </Button>
                                 </ButtonGroup>
@@ -52,9 +52,9 @@
                             </div>
                             <div class="inner-box " style="margin-top:30px;">
                                 <!--<div v-show="isShowEwm" class="show-qrcode">-->
-                                <p slot="header" style="text-align: center;">充币地址二维码</p>
+                                <p slot="header" style="text-align: center;">充币地址二维码({{qrcode.coinName}})</p>
                                 <div class="show-qrcode" style="text-align: center;">
-                                    <!--<qriously :value="qrcode.coinName+':'+qrcode.value" :size="qrcode.size" />-->
+<!--                                    <qriously :value="qrcode.coinName+':'+qrcode.value" :size="qrcode.size" />-->
                                     <qriously :value="qrcode.value" :size="qrcode.size" />
                                 </div>
                             </div>
@@ -139,18 +139,22 @@ export default {
             this.$Message.error(this.$t("uc.finance.recharge.copysuccess"));
         },
         changeCoin(value) {
-            const list = (this.coinList.length>0 && this.coinList.filter(ele=>ele.coin.unit == value)) || [];
+            // const list = (this.coinList.length>0 && this.coinList.filter(ele=>ele.coin.unit == value)) || [];
+
+            const list = this.coinMap[value];
             // this.resetAddress();
             // this.getMoney();
             if(list.length>0){
                 this.qrcode.value = list[0].address || '';
-                this.qrcode.coinName = list[0].coin.name.toLowerCase();
+                this.qrcode.coinName = list[0].token || list[0].coin.name;
             }
             if (!this.qrcode.value) {
                 this.buttonAdd = true;
             } else {
                 this.buttonAdd = false;
             }
+            coinMap[value]
+
             // for (var i = 0; i < this.coinList.length; i++) {
             //     if (this.coinList[i].coin.unit == value) {
 
@@ -158,6 +162,11 @@ export default {
             // }
             this.getCurrentCoinRecharge();
         },
+        changeToken(value) {
+            this.qrcode.value = value.address;
+            this.qrcode.coinName =  value.token || value.coin.name;
+        },
+
         // 获取充币地址
         resetAddress() {
             if (!this.coinType) {
