@@ -11,18 +11,32 @@
                         <!-- <i class="angle" style="right: 71px;"></i> -->
                         <div class="action-inner">
                             <div class="inner-left">
-                                <p class="describe">{{$t('uc.finance.recharge.symbol')}}</p>
-                                <Select v-model="coinType" style="width:100px;margin-top: 23px;" @on-change="changeCoin">
+                                <p class="title-p">{{$t('uc.finance.recharge.symbol')}}</p>
+                                <Select v-model="coinType" style="width:100px;margin-top: 10px;" @on-change="changeCoin">
                                     <Option v-for="item in coinList" :value="item.coin.unit" :key="item.coin.unit">{{ item.coin.unit }}</Option>
                                 </Select>
                             </div>
-                            <div class="inner-box deposit-address">
-                                <p class="describe">{{$t('uc.finance.recharge.address')}}</p>
+                            <div>
+                                <ButtonGroup  v-for="(coin, index ) in coinMap[coinType]" :key="index">
+                                    <Button style="margin-right:10px;margin-top:10px; background: #eeeeee;display: block; font-size: 8px;">
+                                        {{coin.token ? coin.token:coin.coin.name}}
+                                    </Button>
+                                </ButtonGroup>
+                            </div>
+
+                            <div class="inner-left deposit-address " style="margin-top:30px;width: 500px;">
+                                <p class="title-p">{{$t('uc.finance.recharge.address')}}</p>
+                                <Input                                    v-model="qrcode.value"
+                                                                          readonly
+                                                                          style="width: 400px;margin-top:10px;display: inline-block;"
+                                ></Input>
+                                <Button v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" id="copyBtn" style="margin-top:10px; display: inline-block;">
+                                    {{$t('uc.finance.recharge.copy')}}
+                                </Button>
+
+                                <div slot="footer"></div>
                                 <div class="title">
-                                    <Input                                    v-model="qrcode.value"
-                                        readonly
-                                        style="width: 400px"
-                                    ></Input>
+
                                     <Button
                                         v-if="buttonAdd"
                                         class="copy-add"
@@ -33,29 +47,18 @@
 
                                         <!--获取充币地址-->
                                     </Button>
-                                    <a-button-group  v-for="(coin, index ) in coinMap[coinType]">
-                                        <a-button type="primary">
-                                           {{coin.coin.name}}
-                                        </a-button>
-                                    </a-button-group>
-                                    <a v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" id="copyBtn" class="link-copy">
-                                        {{$t('uc.finance.recharge.copy')}}
-                                    </a>
-                                    <a id="showQRcode" class="link-qrcode" href="javascript:;" @click="showEwm">
-                                        {{$t('uc.finance.recharge.qrcode')}}
-                                        <Modal v-model="isShowEwm">
-                                            <!--<div v-show="isShowEwm" class="show-qrcode">-->
-                                            <p slot="header" style="text-align: center;">充币地址二维码</p>
-                                            <div class="show-qrcode" style="text-align: center;">
-                                                <!--<qriously :value="qrcode.coinName+':'+qrcode.value" :size="qrcode.size" />-->
-                                                <qriously :value="qrcode.value" :size="qrcode.size" />
-                                            </div>
-                                            <div slot="footer"></div>
-                                        </Modal>
-                                    </a>
                                 </div>
 
                             </div>
+                            <div class="inner-box " style="margin-top:30px;">
+                                <!--<div v-show="isShowEwm" class="show-qrcode">-->
+                                <p slot="header" style="text-align: center;">充币地址二维码</p>
+                                <div class="show-qrcode" style="text-align: center;">
+                                    <!--<qriously :value="qrcode.coinName+':'+qrcode.value" :size="qrcode.size" />-->
+                                    <qriously :value="qrcode.value" :size="qrcode.size" />
+                                </div>
+                            </div>
+
                         </div>
                         <div class="action-content">
                             <div class="action-body">
